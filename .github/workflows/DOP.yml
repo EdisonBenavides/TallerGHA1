@@ -1,0 +1,36 @@
+
+# Nombre del workflow
+name: DevOps
+
+# Controles cuando el workflow inicia
+on:
+    # Triggers para cuando haya un push o pull request en la rama main
+    push:
+        branches: [ "main" ]
+    pull_request:
+        branches: [ "main" ]
+    
+    # Permite que el workflow se ejecute manualmente desde la pestaña de actions en GitHub
+    workflow_dispatch:
+
+
+jobs:
+    # job llamado build
+    build:
+        # El job se ejecutará en un runner con el sistema operativo Ubuntu (última version)
+        runs-on: ubuntu-latest
+
+        # Tareas que se ejecutara en el job
+        steps:
+            # Clona el repositorio en el runner para que los steps tengan acceso al código
+            - uses: actions/checkout@v4
+
+            # Ejecuta el comando echo Prueba, CI, que imprime "Prueba, CI" en la consola
+            - name: Run a one-line script
+              run: echo Prueba, CI
+            
+            # Ejecuta dos comandos echo en secuencia. El primer comando imprime "Add other actions to build," y el segundo imprime "test, and deploy your project"
+            - name: Run a multi-line script
+              run: |
+                echo Add other actions to build,
+                echo test, and deploy your project.
